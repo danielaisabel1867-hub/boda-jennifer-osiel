@@ -177,8 +177,8 @@ body,p,.k,.big,.mn,.count b,.count span,.btn,.hero .k,#s1 p{color:#000}
   <div class="k">Código de vestimenta</div>
   <div class="big" style="font-size:1.25rem">Etiqueta formal</div>
   <p style="font-style:italic;font-size:1.05rem;margin-bottom:.9rem">Con todo cariño, te pedimos reservar el blanco para la novia en su día más especial.</p>
-  <div class="k">Regalos</div>
-  <p style="font-size:1.05rem">Tu presencia es nuestro mayor regalo. Si deseas bendecirnos además, recibiremos tu detalle con gratitud en un sobre.</p>
+  <div id="regalos"><div class="k">Regalos</div>
+  <p style="font-size:1.05rem">Tu presencia es nuestro mayor regalo. Si deseas bendecirnos además, recibiremos tu detalle con gratitud en un sobre.</p></div>
   <button class="btn" data-next>Confirmar asistencia</button>
 </div>
 
@@ -242,7 +242,7 @@ function esc(t){var d=document.createElement('div');d.textContent=t;return d.inn
 function $(i){return document.getElementById(i)}
 var qs=new URLSearchParams(location.search),slug=qs.get('f'),fam=null,lastAns=[];
 var LBL={attending:'Asistirá',declined:'No asistirá',pending:'Pendiente'},CLS={attending:'a',declined:'d',pending:'p'};
-function drawFam(){$('gen').style.display='none';$('fk').textContent='Invitación para la familia '+fam.display_name;
+function drawFam(){$('gen').style.display='none';$('fk').textContent='Invitación para '+fam.display_name;var rg=$('regalos');if(rg)rg.style.display=(fam.category==='especial')?'none':'';
  $('fam').innerHTML=fam.guests.map(function(g){return '<div class="row"><div class="mn">'+esc(g.name)+'</div><div class="pills"><label><input type="radio" name="g'+g.id+'" value="attending"'+(g.status==='attending'?' checked':'')+'><span>Asistirá</span></label><label><input type="radio" name="g'+g.id+'" value="declined"'+(g.status==='declined'?' checked':'')+'><span>No asistirá</span></label></div></div>'}).join('');
  if(fam.note)$('ms').value=fam.note}
 if(slug)api('/rest/v1/rpc/get_family',{method:'POST',body:JSON.stringify({p_slug:slug})}).then(function(f){if(f){fam=f;drawFam()}}).catch(function(){});
