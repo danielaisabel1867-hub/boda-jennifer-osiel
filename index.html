@@ -271,4 +271,5 @@ $('go').onclick=function(){$('lgerr').textContent='';api('/auth/v1/token?grant_t
 $('gg').onclick=function(){var f=$('gf').value.trim(),n=$('gn').value.split('\n').map(function(x){return x.trim()}).filter(Boolean);if(!f||!n.length)return;
  api('/rest/v1/rpc/admin_add_family',{method:'POST',body:JSON.stringify({p_name:f,p_guests:n})},tok).then(function(sl){var o=$('gout');o.style.display='block';o.textContent=link(sl);$('gf').value='';$('gn').value='';load()}).catch(function(){$('gout').style.display='block';$('gout').textContent='No se pudo crear. ¿Tu sesión está activa y tu correo autorizado?'})};
 if(/[?&]admin/.test(location.search)){cover.style.display='none';show(6);if(tok){$('lg').style.display='none';$('pn').style.display='flex';load()}}
-</script></body></html>
+</script></body>
+</html>
